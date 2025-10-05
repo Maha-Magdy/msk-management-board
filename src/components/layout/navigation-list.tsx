@@ -1,15 +1,15 @@
 import { createListCollection, Listbox, Box } from "@chakra-ui/react";
 import { GiTeamIdea } from "react-icons/gi";
 import { useAppStore } from "../../app/store/app";
-import { HiHome } from "react-icons/hi";
+import { RiDashboardHorizontalFill } from "react-icons/ri";
 
 const navigationList = createListCollection({
   items: [
     {
-      label: "Home",
-      value: "home",
+      label: "Dashboard",
+      value: "dashboard",
       href: "/",
-      icon: <HiHome size={16} />,
+      icon: <RiDashboardHorizontalFill size={16} />,
     },
     {
       label: "Suggestions",

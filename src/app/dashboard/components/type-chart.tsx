@@ -3,11 +3,13 @@
 import { Chart, useChart } from "@chakra-ui/charts";
 import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts";
-import { ChartData } from "../types/chart-data";
+import { ChartData } from "../types/chart";
 import { getTypeDistribution } from "../actions/charts";
+import { Skeleton } from "@chakra-ui/react";
 
 export default function TypeChart() {
   const [data, setData] = useState<ChartData[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const yAxisMax = Math.max(...data.map((item) => Number(item.value)));
 
   const chartData = data.map((item) => ({
@@ -22,8 +24,16 @@ export default function TypeChart() {
   });
 
   useEffect(() => {
-    getTypeDistribution().then(setData);
+    setIsLoading(true);
+    getTypeDistribution().then((data) => {
+      setData(data);
+      setIsLoading(false);
+    });
   }, []);
+
+  if (isLoading) {
+    return <Skeleton height="385px" marginLeft={{sm: 0, md: 4}}/>;
+  }
 
   return (
     <Chart.Root maxH="sm" chart={chart}>

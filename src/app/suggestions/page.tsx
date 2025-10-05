@@ -22,13 +22,17 @@ export default function SuggestionsPage() {
   const [selectedSuggestion, setSelectedSuggestion] = useState<Suggestion>();
 
   const { getSuggestionsQuery, suggestionStatusMutation } = useSuggestions(filters);
-  const { data = [] } = getSuggestionsQuery;
+  const { data = [], isLoading } = getSuggestionsQuery;
   const { getEmployeesQuery } = useEmployees();
   const { data: employees = [] } = getEmployeesQuery;
 
   function handleTableRowClick(suggestion: Suggestion) {
     setSelectedSuggestion(suggestion);
     setIsOverviewSuggestionDrawerOpen(true);
+  }
+
+  if (isLoading) {
+    return <p>Fetching...</p>
   }
 
   return (
