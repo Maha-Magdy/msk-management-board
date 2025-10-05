@@ -1,0 +1,10 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" width="600" height="200">
+	<style>
+		tspan { white-space:pre } 
+		.t0 { font-size: 100px;fill: #60a5fa;font-weight: 400;font-family: "AbrilFatface-Regular", "Abril Fatface" } 
+	</style>
+	<text id="MSK Board" style="transform: matrix(1.087,0,0,1.087,17.827,140.506)" >
+		<tspan x="0" y="0" class="t0">M</tspan><tspan  y="0" class="t0">S</tspan><tspan  y="0" class="t0">K</tspan><tspan  y="0" class="t0"> </tspan><tspan  y="0" class="t0">B</tspan><tspan  y="0" class="t0">o</tspan><tspan  y="0" class="t0">a</tspan><tspan  y="0" class="t0">r</tspan><tspan  y="0" class="t0">d</tspan><tspan  y="0" class="t0">
+</tspan>
+	</text>
+</svg>

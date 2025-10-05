@@ -6,20 +6,34 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:seed": "node seed.js"
   },
   "dependencies": {
+    "@chakra-ui/charts": "^3.27.0",
+    "@chakra-ui/react": "^3.27.0",
+    "@emotion/react": "^11.14.0",
+    "@tanstack/react-query": "^5.90.2",
+    "better-sqlite3": "^12.4.1",
+    "moment": "^2.30.1",
+    "next": "15.5.4",
+    "next-themes": "^0.4.6",
     "react": "19.1.0",
+    "react-data-table-component": "^7.7.0",
     "react-dom": "19.1.0",
-    "next": "15.5.4"
+    "react-icons": "^5.5.0",
+    "recharts": "^3.2.1",
+    "xss": "^1.0.15",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
-    "@eslint/eslintrc": "^3"
+    "typescript": "^5"
   }
 }
