@@ -34,9 +34,9 @@ export default function RootLayout({
           <Flex>
             <Sidebar />
 
-            <VStack gap={0} minH="vh" flexGrow={1}>
+            <VStack gap={0} minH="100vh" flexGrow={1}>
               <Header />
-              <Box as="main" bgColor="bg.muted" w={{ base: "vw", lg: "full" }} p={4} flexGrow={1}>
+              <Box as="main" bgColor="bg.muted" w={{ base: "100vw", lg: "100%" }} p={4} flexGrow={1}>
                 {children}
               </Box>
             </VStack>

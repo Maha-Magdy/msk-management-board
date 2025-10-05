@@ -40,10 +40,11 @@ export function SelectBox({
       width={width}
       minWidth={minWidth}
       maxWidth={maxWidth}
+      aria-labelledby={label}
     >
       <Select.HiddenSelect />
       {label && (
-        <Select.Label fontWeight={{ base: "semibold", lg: "normal" }}>
+        <Select.Label fontWeight={{ base: "semibold", lg: "normal" }} id={label}>
           {label} {required && <Field.RequiredIndicator />}
         </Select.Label>
       )}

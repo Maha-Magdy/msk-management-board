@@ -1,44 +1,155 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<a name="msk-management-board"></a>
+
+# MSK Management Board
+
+<a name="about"></a>
+
+## About
+
+**MSK Management Board** is a board that helps companies keep track of MSK suggestions, whether they have been added automatically by VIDA system or manually by admins of the board. This system allows admins, such as HR/H&S teams, to view suggestions, change their status, and add new suggestions. Moreover, the system includes a dashboard that analyzes the suggestions and presents these analyses in charts to give users an overall view of the suggestions.
+
+![screenshot](./app_screenshot_1.png)
+
+![screenshot](./app_screenshot_2.png)
+
+## Table of contents
+
+- [MSK Management Board](#msk-management-board)
+  - [About](#about)
+  - [Table of contents](#table-of-contents)
+  - [Features](#features)
+  - [Project Architecture](#project-architecture)
+  - [Getting Started](#getting-started)
+  - [Demo](#demo)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Show your support](#show-your-support)
+
+<a name="features"></a>
+
+## Features
+
+- **Dashboard**
+  Displays charts for quick insights, including a bar chart showing MSK types for all suggestions (percentage comparison), Kanban-style cards for statuses (Pending, In Progress, Completed, Overdue) with suggestion counts and sparklines over time, and a pie chart showing priorities.
+
+- **Table View**
+  A scalable table to view all suggestions with filters for type, priority, status, and source, plus a search box for employee name or ID. Ideal for managing large datasets without clutter. Users can also sort suggestions by created_at date or priority by clicking the respective table header cell, making it easy to organize data.
+
+- **Suggestion Details**
+  Click any row in the table to open a drawer showing full suggestion details.
+
+- **Add Suggestion**
+  Admins can add new suggestions via a drawer form accessed by the "New Suggestion" button.
+
+- **Clean, Responsive UI**
+  All features are delivered in a modern, clean design optimized for all screen sizes.
+
+<a name="project-architecture"></a>
+
+## Project Architecture
+
+- **Technology Stack**
+
+  - **Frontend & Backend: Next.js with React:**
+
+      *Why Next.js was chosen over plain React for several reasons:*
+
+      **Built-in API Routes:** Allows mocking the backend directly within the app, making development faster and easier. When a real backend is ready, API logic can be updated without affecting the frontend.
+
+      **Future Complexity:** Next.js supports Server-Side Rendering (SSR) and Static Site Generation (SSG), allowing pages like the dashboard page to pre-rendered. This delivers faster perceived load times and better performance — essential for data-heavy dashboards, which is by time this board will be.
+
+  - **Database: SQLite3:** a lightweight SQL database, simple to integrate with Next.js, and ideal for prototyping.
+
+- **Architecture & Project Structure**
+
+  - **Feature-Based Structure:** The project is organized using the src/features pattern, keeping related files together for better scalability and maintainability.
+
+  - **Global State:** A lightweight hook-based state manager, which is Zustand is used for truly global state (e.g., sidebar (open/close) state currently, and in the future to store logged-in admin).
+
+  - **State Management:** React Query is used for handling server state (fetching, caching, re-fetching, optimistic updates), freeing components from manual loading/error handling.
+
+  - **Styling & Design:** Chakra UI for a clean, accessible, and consistent UI. 
+  
+- **Database Schema**
+
+  The SQLite database is structured to support core features such as managing suggestions, employees, and querying analytics data.
+
+  ![screenshot](./app_database_schema.png)
+
+<a name="getting_started"></a>
 
 ## Getting Started
 
-First, run the development server:
+_run it locally by following these steps:
+
+Clone the project
+Download the project files to your local machine:
+
+```bash
+git clone https://github.com/Maha-Magdy/msk-management-board.git
+```
+
+Install dependencies
+Navigate into the project directory, and install the required packages:
+
+```bash
+cd msk-management-board
+npm install
+```
+
+Initialize the Database
+After installing dependencies, run the following commands to initialize and seed the database:
+
+```bash
+# Initialize the database
+node initdb.js
+
+# Seed the database with sample data
+node seed.js
+```
+
+Run the development server
+Start the local development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+After running this command, you will see output similar to:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```arduino
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  ▲ Next.js 15.5.4
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.94:3000
 
-## Learn More
+```
 
-To learn more about Next.js, take a look at the following resources:
+This will open the application in your browser
+Open your browser and visit the Local URL provided (e.g., http://localhost:3000).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<a name="demo"></a>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Demo
 
-## Deploy on Vercel
+Here is the link to the video demo of the MSK Management Board:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Video Demo Link](https://www.loom.com/share/d74580279451417a932bd84df1d0ab49?sid=922fa814-33cc-41a3-8a14-7cc13d37f087)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<a name="contributing"></a>
 
+## Contributing
 
-- Add AdminId (Foreign Key) to track which admin created a manual suggestion 
-but the history of its completion and administrative action.
+Contributions, issues, and feature requests are welcome!
 
-- Add user table with ability to add the role of the users admin / employee because maybe in the future will do specific dedicated view for admins, and employees
+Feel free to check the [issues page](https://github.com/Maha-Magdy/msk-management-board/issues).
 
-- room for improvements add virtualizations if the table of suggestions get scalable
+<a name="license"></a>
+
+## License
+
+This project is [MIT](./LICENSE) licensed.
+
+## Show your support
+
+Give a ⭐️ if you like this project!

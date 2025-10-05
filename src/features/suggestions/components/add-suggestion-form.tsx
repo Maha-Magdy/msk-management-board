@@ -91,7 +91,7 @@ export default function AddSuggestionForm({ employees, callback }: AddSuggestion
       <Fieldset.Root size="lg" maxW="md">
         <Stack>
           <Fieldset.HelperText>Please provide your suggestion details below.</Fieldset.HelperText>
-          {error && <Field.ErrorText>This is an error text</Field.ErrorText>}
+          {error && <Field.ErrorText>Error, Please fill the missing inputs</Field.ErrorText>}
         </Stack>
 
         <Fieldset.Content>

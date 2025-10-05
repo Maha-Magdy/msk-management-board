@@ -20,4 +20,15 @@ Object.defineProperty(window, "matchMedia", {
   })),
 });
 
+Object.defineProperty(HTMLElement.prototype, "scrollTo", {
+  configurable: true,
+  value: () => {}, // noop
+});
+
+global.ResizeObserver = class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+
 // globalThis.fetch = require('jest-fetch-mock');

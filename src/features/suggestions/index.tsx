@@ -1,7 +1,7 @@
 "use client"
 
 import { useAppStore } from "@/store/app";
-import { VStack, Grid, GridItem } from "@chakra-ui/react";
+import { VStack, Grid, GridItem, Skeleton } from "@chakra-ui/react";
 import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import useEmployees from "../employees/hooks/useEmployees";
@@ -32,9 +32,14 @@ export default function Suggestions() {
     setIsOverviewSuggestionDrawerOpen(true);
   }
 
-  if (isLoading) {
-    return <p>Fetching...</p>;
-  }
+  // if (isLoading) {
+  //   return (
+  //     <>
+  //        <Skeleton height="100px" marginBottom={4} />
+  //        <Skeleton height="100%" />
+  //     </>
+  //   );
+  // }
 
   return (
     <>
@@ -68,6 +73,7 @@ export default function Suggestions() {
           data={data as Suggestion[]}
           onUpdateStatus={(id, status) => suggestionStatusMutation.mutate({ id, status })}
           callback={handleTableRowClick}
+          isLoading={isLoading}
         />
       </VStack>
 

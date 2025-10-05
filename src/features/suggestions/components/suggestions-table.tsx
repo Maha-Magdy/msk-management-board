@@ -1,5 +1,5 @@
 import DataTable from "react-data-table-component";
-import { Button, Flex, Menu, Portal, Text } from "@chakra-ui/react";
+import { Button, Flex, Menu, Portal, Skeleton, Text } from "@chakra-ui/react";
 import { Priority, Status, Suggestion } from "../types/suggestion";
 import moment from "moment";
 import { FcHighPriority, FcLowPriority, FcMediumPriority } from "react-icons/fc";
@@ -8,6 +8,7 @@ interface SuggestionsTableProps {
   data: Suggestion[];
   onUpdateStatus: (id: number, status: Status) => void;
   callback: (row: Suggestion) => void;
+  isLoading: boolean;
 }
 
 const customStyles = {
@@ -38,7 +39,7 @@ const priorityOrder: Record<Priority, number> = {
   low: 3,
 };
 
-export default function SuggestionsTable({ data, onUpdateStatus, callback }: SuggestionsTableProps) {
+export default function SuggestionsTable({ data, onUpdateStatus, callback, isLoading }: SuggestionsTableProps) {
   const columns = [
     {
       name: "Employee",
@@ -52,7 +53,11 @@ export default function SuggestionsTable({ data, onUpdateStatus, callback }: Sug
     {
       name: "Type",
       selector: (row: Suggestion) => row.type,
-      cell: (row: Suggestion) => <Text data-tag="allowRowEvents" textTransform="capitalize">{row.type}</Text>,
+      cell: (row: Suggestion) => (
+        <Text data-tag="allowRowEvents" textTransform="capitalize">
+          {row.type}
+        </Text>
+      ),
     },
     {
       name: "Description",
@@ -62,7 +67,11 @@ export default function SuggestionsTable({ data, onUpdateStatus, callback }: Sug
     {
       name: "Created",
       selector: (row: Suggestion) => row.created_at,
-      cell: (row: Suggestion) => <Text data-tag="allowRowEvents" textTransform="capitalize">{moment(row.created_at).format("DD MMM YYYY")}</Text>,
+      cell: (row: Suggestion) => (
+        <Text data-tag="allowRowEvents" textTransform="capitalize">
+          {moment(row.created_at).format("DD MMM YYYY")}
+        </Text>
+      ),
       sortable: true,
     },
     {
@@ -82,7 +91,11 @@ export default function SuggestionsTable({ data, onUpdateStatus, callback }: Sug
     {
       name: "Source",
       selector: (row: Suggestion) => row.source,
-      cell: (row: Suggestion) => <Text data-tag="allowRowEvents" textTransform="capitalize">{row.source === "vida" ? "VIDA" : "Admin"}</Text>,
+      cell: (row: Suggestion) => (
+        <Text data-tag="allowRowEvents" textTransform="capitalize">
+          {row.source === "vida" ? "VIDA" : "Admin"}
+        </Text>
+      ),
     },
     {
       name: "Status",
@@ -145,5 +158,15 @@ export default function SuggestionsTable({ data, onUpdateStatus, callback }: Sug
     },
   ];
 
-  return <DataTable data={data} columns={columns} customStyles={customStyles} onRowClicked={(row: Suggestion) => callback(row)} striped />;
+  return (
+    <DataTable
+      data={data}
+      columns={columns}
+      customStyles={customStyles}
+      onRowClicked={(row: Suggestion) => callback(row)}
+      progressPending={isLoading}
+      progressComponent={<div className="loader"></div>}
+      striped
+    />
+  );
 }

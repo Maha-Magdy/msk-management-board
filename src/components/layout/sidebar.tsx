@@ -49,6 +49,7 @@ export default function Sidebar() {
           h={14}
           w="full"
           bgColor="blue.900"
+          borderBottom="2px solid white"
         >
           <Link href="/" aria-label="Msk Management Board, Back to homepage">
             {isSidebarOpen && (
