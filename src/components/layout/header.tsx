@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { CiMenuBurger } from "react-icons/ci";
-import { useAppStore } from "../../app/store/app";
+import { useAppStore } from "../../store/app";
 
 export default function Header() {
   const { openSidebar } = useAppStore();

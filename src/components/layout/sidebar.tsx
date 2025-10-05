@@ -12,7 +12,7 @@ import Link from "next/link";
 import NavigationList from "./navigation-list";
 import { IoCloseOutline } from "react-icons/io5";
 import { CiMenuBurger } from "react-icons/ci";
-import { useAppStore } from "../../app/store/app";
+import { useAppStore } from "../../store/app";
 import { useState } from "react";
 
 export default function Sidebar() {

@@ -1,6 +1,6 @@
 import { VStack, Text, Menu, Button, Flex } from "@chakra-ui/react";
 import { Status, Suggestion } from "../types/suggestion";
-import { Employee } from "@/app/employees/types/employee";
+import { Employee } from "@/features/employees/types/employee";
 import { FcHighPriority, FcMediumPriority, FcLowPriority } from "react-icons/fc";
 import moment from "moment";
 

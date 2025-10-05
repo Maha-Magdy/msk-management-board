@@ -4,7 +4,7 @@ import "./globals.css";
 import Header from "../components/layout/header";
 import { Box, Flex, VStack } from "@chakra-ui/react";
 import Sidebar from "../components/layout/sidebar";
-import Providers from "./providers";
+import Providers from "../providers";
 import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = Geist({

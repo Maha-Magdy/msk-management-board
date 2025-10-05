@@ -1,6 +1,6 @@
 import { createListCollection, Listbox, Box } from "@chakra-ui/react";
 import { GiTeamIdea } from "react-icons/gi";
-import { useAppStore } from "../../app/store/app";
+import { useAppStore } from "../../store/app";
 import { RiDashboardHorizontalFill } from "react-icons/ri";
 
 const navigationList = createListCollection({

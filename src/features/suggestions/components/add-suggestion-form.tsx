@@ -1,4 +1,4 @@
-import { Employee } from "@/app/employees/types/employee";
+import { Employee } from "@/features/employees/types/employee";
 import { SelectBox } from "@/components/ui/select-box";
 import {
   Combobox,
