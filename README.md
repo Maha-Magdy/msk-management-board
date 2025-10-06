@@ -129,12 +129,14 @@ This will open the application in your browser
 Open your browser and visit the Local URL provided (e.g., http://localhost:3000).
 
 <a name="demo"></a>
-
+  
 ## Demo
 
-Here is the link to the video demo of the MSK Management Board:
+Here are the links to the video demos of the MSK Management Board:
 
-- [Video Demo Link](https://www.loom.com/share/d74580279451417a932bd84df1d0ab49?sid=922fa814-33cc-41a3-8a14-7cc13d37f087)
+🎥 [Video Demo Link _ Part 1](https://www.loom.com/share/75a64a5985524a97b071f20d0e8fbba9?sid=4ad3fb58-e915-44eb-877e-5ccb313a7d86)
+
+🎥 [Video Demo Link _ Part 2](https://www.loom.com/share/f4d0b6d1f131491abde4da86f4ab60b6?sid=a3bfc0e8-a5fa-4dca-bac8-699c85fe01e5)
 
 <a name="contributing"></a>
 

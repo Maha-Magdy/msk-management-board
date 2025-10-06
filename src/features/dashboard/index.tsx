@@ -13,6 +13,7 @@ import SparklineCard from "./components/sparkline-card";
 import TypeChart from "./components/type-chart";
 import { MonthlyChartData } from "./types/chart";
 import SparkLineChart from "./components/sparkline-chart";
+import { useAppStore } from "@/store/app";
 
 const initialMonthlyChartData = {
   data: [],
@@ -21,6 +22,8 @@ const initialMonthlyChartData = {
 };
 
 export default function Dashboard() {
+  const { isSidebarOpen } = useAppStore();
+
   const [pendingData, setPendingData] = useState<MonthlyChartData>(initialMonthlyChartData);
   const [inProgressData, setInProgressData] = useState<MonthlyChartData>(initialMonthlyChartData);
   const [completedData, setCompletedData] = useState<MonthlyChartData>(initialMonthlyChartData);
@@ -65,7 +68,11 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <Box>
+    <Box
+      width={{
+        lg: isSidebarOpen ? "calc(100vw - 20rem)" : "calc(100vw - 130px)",
+      }}
+    >
       <Flex width="full" gap={4} mb={4} direction={{ base: "column", md: "row" }}>
         <SparklineCard
           title="Pending"

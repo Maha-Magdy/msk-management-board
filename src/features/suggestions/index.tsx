@@ -32,15 +32,6 @@ export default function Suggestions() {
     setIsOverviewSuggestionDrawerOpen(true);
   }
 
-  // if (isLoading) {
-  //   return (
-  //     <>
-  //        <Skeleton height="100px" marginBottom={4} />
-  //        <Skeleton height="100%" />
-  //     </>
-  //   );
-  // }
-
   return (
     <>
       <VStack
