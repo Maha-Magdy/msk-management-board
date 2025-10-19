@@ -5,9 +5,11 @@ import { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts";
 import { ChartData } from "../types/chart";
 import { getTypeDistribution } from "../actions/charts";
-import { Skeleton } from "@chakra-ui/react";
+import { Skeleton, useBreakpointValue } from "@chakra-ui/react";
 
 export default function TypeChart() {
+  const isMobileView = useBreakpointValue({ base: true, md: false });
+
   const [data, setData] = useState<ChartData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const yAxisMax = Math.max(...data.map((item) => Number(item.value)));
@@ -32,12 +34,15 @@ export default function TypeChart() {
   }, []);
 
   if (isLoading) {
-    return <Skeleton height="385px" marginLeft={{sm: 0, md: 4}}/>;
+    return <Skeleton height="385px" marginLeft={{ sm: 0, md: 4 }} />;
   }
 
   return (
     <Chart.Root maxH="sm" chart={chart}>
-      <BarChart data={chart.data}>
+      <BarChart
+        data={chart.data}
+        barSize={isMobileView ? 35 : 55}
+      >
         <CartesianGrid stroke={chart.color("border.muted")} vertical={false} />
         <XAxis
           tickLine={false}
@@ -54,10 +59,12 @@ export default function TypeChart() {
         {chart.series.map((item) => (
           <Bar
             key={item.name}
-            isAnimationActive={false}
+            isAnimationActive={true}
             dataKey={chart.key(item.name)}
             fill={chart.color(item.color)}
             stroke={chart.color("border")}
+            radius={5}
+            width="25px"
           >
             <LabelList dataKey={chart.key("value")} position="top" style={{ fill: chart.color("fg") }} />
           </Bar>

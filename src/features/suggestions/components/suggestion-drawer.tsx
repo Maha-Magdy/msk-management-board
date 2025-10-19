@@ -22,7 +22,7 @@ export default function SuggestionDrawer({
     <Drawer.Root preventScroll={true} open={isOpen} onOpenChange={(e) => setIsOpen(e.open)} size="sm">
       {triggerTitle && (
         <Drawer.Trigger asChild>
-          <Button size="sm" variant="solid" backgroundColor="blue.400" _hover={{ backgroundColor: "blue.500" }}>
+          <Button size="sm" width="full" variant="solid" backgroundColor="blue.400" _hover={{ backgroundColor: "blue.500" }}>
             {triggerIcon && triggerIcon}
             {triggerTitle}
           </Button>

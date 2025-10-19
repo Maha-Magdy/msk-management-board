@@ -1,19 +1,12 @@
 "use client";
 
-import {
-  Avatar,
-  Flex,
-  IconButton,
-  Menu,
-  Portal,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Avatar, Flex, IconButton, Menu, Portal, useBreakpointValue } from "@chakra-ui/react";
 import Link from "next/link";
 import { CiMenuBurger } from "react-icons/ci";
 import { useAppStore } from "../../store/app";
 
 export default function Header() {
-  const { openSidebar } = useAppStore();
+  const openSidebar = useAppStore((state) => state.openSidebar);
   const showElement = useBreakpointValue({ base: true, lg: false });
 
   return (
@@ -27,22 +20,12 @@ export default function Header() {
     >
       {showElement && (
         <>
-          <IconButton
-            aria-label="Open the sidebar navigation"
-            bgColor="blue.400"
-            onClick={openSidebar}
-          >
+          <IconButton aria-label="Open the sidebar navigation" bgColor="blue.400" onClick={openSidebar}>
             <CiMenuBurger />
           </IconButton>
 
           <Link href="/" aria-label="Msk Management Board, Back to homepage">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              version="1.2"
-              viewBox="0 0 600 200"
-              width="150"
-              height="50"
-            >
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 600 200" width="150" height="50">
               <style>
                 {`tspan { white-space:pre } 
 		.t0 { font-size: 100px;fill: #60a5fa;font-weight: 400;font-family: "AbrilFatface-Regular", "Abril Fatface" } `}
@@ -97,13 +80,7 @@ export default function Header() {
         <Portal>
           <Menu.Positioner>
             <Menu.Content p="2">
-              <Menu.Item
-                value="maha magdy"
-                px="2"
-                py="1"
-                fontWeight="bold"
-                _hover={{ backgroundColor: "unset" }}
-              >
+              <Menu.Item value="maha magdy" px="2" py="1" fontWeight="bold" _hover={{ backgroundColor: "unset" }}>
                 Maha Magdy
               </Menu.Item>
               <Menu.Separator my="2" />

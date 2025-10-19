@@ -1,9 +1,9 @@
 import { createListCollection, Listbox, Box } from "@chakra-ui/react";
-import { GiTeamIdea } from "react-icons/gi";
 import { useAppStore } from "../../store/app";
 import { RiDashboardHorizontalFill } from "react-icons/ri";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { HiLightBulb } from "react-icons/hi2";
 
 const navigationList = createListCollection({
   items: [
@@ -17,17 +17,17 @@ const navigationList = createListCollection({
       label: "Suggestions",
       value: "suggestions",
       href: "/suggestions",
-      icon: <GiTeamIdea size={16} />,
+      icon: <HiLightBulb size={16} />,
     },
   ],
 });
 
 export default function NavigationList() {
-  const { isSidebarOpen } = useAppStore();
+  const isSidebarOpen = useAppStore((state) => state.isSidebarOpen);
   const pathname = usePathname();
 
   return (
-    <Listbox.Root collection={navigationList} width="full">
+    <Listbox.Root collection={navigationList} width="full" position="sticky" top={14} zIndex="docked">
       <Listbox.Content borderRadius={0} border="unset" bgColor="transparent" p={0} gap={0}>
         {navigationList.items.map((navigationItem) => {
           const isActive = pathname === navigationItem.href;

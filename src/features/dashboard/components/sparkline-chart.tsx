@@ -17,10 +17,10 @@ export default function SparkLineChart({ data, color }: SparkLineChartProps) {
   return (
     <Chart.Root height="10" chart={chart}>
       <AreaChart data={chart.data} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
-        {chart.series.map((item) => (
+        {chart.series.map((item, index) => (
           <Area
-            key={item.name}
-            isAnimationActive={false}
+            key={`${item.name}-${index}`}
+            isAnimationActive={true}
             dataKey={chart.key(item.name)}
             fill={chart.color(item.color)}
             fillOpacity={0.2}

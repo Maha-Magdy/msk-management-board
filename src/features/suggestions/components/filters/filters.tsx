@@ -4,6 +4,7 @@ import { GridItem, useBreakpointValue } from "@chakra-ui/react";
 import EmployeeSearchBox from "./search-box";
 import DropdownFilters from "./dropdown-filters";
 import FiltersDrawer from "./filters-drawer";
+import { useSuggestionsStore } from "../../store/suggestions";
 
 interface SuggestionsFiltersProps {
   filters?: Filters;
@@ -12,15 +13,23 @@ interface SuggestionsFiltersProps {
 
 export default function SuggestionsFilters({ filters, onChange }: SuggestionsFiltersProps) {
   const [draftFilters, setDraftFilters] = useState<Filters | undefined>(filters);
-  const isMobileView = useBreakpointValue({ base: true, lg: false });
+  const { toggleClearSuggestions, selectedSuggestions } = useSuggestionsStore();
+  const isMobileView = useBreakpointValue({ base: true, xl: false });
 
   function handleClearFilters() {
     setDraftFilters(undefined);
     onChange(undefined);
+    toggleClearSuggestions();
   }
 
   function handleApplyFilters() {
     onChange(draftFilters);
+    toggleClearSuggestions();
+  }
+
+  function handleOnSearchValueChange(value: string) {
+    onChange((filters) => ({ ...filters, search: value }));
+    toggleClearSuggestions();
   }
 
   useEffect(() => setDraftFilters(filters), [filters]);
@@ -37,11 +46,13 @@ export default function SuggestionsFilters({ filters, onChange }: SuggestionsFil
         )}
       </GridItem>
 
-      <GridItem gridArea={{ base: "1/ 1 /span 1/ span 2", lg: "auto" }}>
-        <EmployeeSearchBox
-          filters={filters}
-          callback={(value: string) => onChange((filters) => ({ ...filters, search: value }))}
-        />
+      <GridItem
+        gridArea={{
+          base: selectedSuggestions.length > 0 ? "1/ 1 /span 1/ span 3" : "1/ 1 /span 1/ span 2",
+          lg: "auto",
+        }}
+      >
+        <EmployeeSearchBox filters={filters} callback={handleOnSearchValueChange} />
       </GridItem>
     </>
   );

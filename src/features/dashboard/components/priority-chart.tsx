@@ -40,7 +40,7 @@ export default function PriorityChart() {
         <Tooltip cursor={false} animationDuration={100} content={<Chart.Tooltip hideLabel />} />
         <Legend content={<Chart.Legend />} wrapperStyle={{ bottom: isMobileView ? -5 : -45 }} />
         <Pie
-          isAnimationActive={false}
+          isAnimationActive={true}
           data={chart.data}
           dataKey={chart.key("value")}
           nameKey="name"

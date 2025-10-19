@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getEmployees } from "../lib/employees";
+import { getEmployees } from "../actions/employees";
 import { Employee } from "../types/employee";
 
 export default function useEmployees() {

@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Box,
-  CloseButton,
-  Flex,
-  IconButton,
-  useBreakpointValue,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, CloseButton, Flex, IconButton, useBreakpointValue, VStack } from "@chakra-ui/react";
 import Link from "next/link";
 import NavigationList from "./navigation-list";
 import { IoCloseOutline } from "react-icons/io5";
@@ -23,21 +16,16 @@ export default function Sidebar() {
   return (
     <>
       {isSidebarOpen && isMobileView && (
-        <Box
-          w="vw"
-          h="vh"
-          bgColor="blackAlpha.500"
-          position="absolute"
-          zIndex="overlay"
-        />
+        <Box w="vw" minH="vh" height="full" bgColor="blackAlpha.500" position="absolute" zIndex="overlay" />
       )}
 
       <VStack
         as="aside"
         gap={0}
         minH="vh"
+        height="full"
         bgColor="blue.800"
-        position={{ base: "absolute", lg: "initial" }}
+        position={{ base: "absolute", lg: "fixed" }}
         zIndex={{ base: "skipNav", lg: "base" }}
         display={!isSidebarOpen && isMobileView ? "none" : "flex"}
         width={isSidebarOpen ? { base: "2/3", lg: "80" } : "20"}
@@ -50,16 +38,13 @@ export default function Sidebar() {
           w="full"
           bgColor="blue.900"
           borderBottom="2px solid white"
+          position="sticky"
+          top={0}
+          zIndex="docked"
         >
           <Link href="/" aria-label="Msk Management Board, Back to homepage">
             {isSidebarOpen && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                version="1.2"
-                viewBox="0 0 600 200"
-                width="150"
-                height="50"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 600 200" width="150" height="50">
                 <style>
                   {`tspan { white-space:pre } 
 		.t1 { font-size: 100px;fill: #ffffff;font-weight: 400;font-family: "AbrilFatface-Regular", "Abril Fatface" } `}
@@ -115,13 +100,7 @@ export default function Sidebar() {
               onMouseLeave={() => setIsLogoOnHover(false)}
             >
               {!isLogoOnHover && (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  version="1.2"
-                  viewBox="0 0 200 100"
-                  width="50"
-                  height="50"
-                >
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.2" viewBox="0 0 200 100" width="50" height="50">
                   <style>
                     {`tspan { white-space:pre } 
                 .t2 { font-size: 68px;fill: white;font-weight: 400;font-family: "AbrilFatface-Regular", "Abril Fatface" }`}
@@ -151,11 +130,7 @@ export default function Sidebar() {
           )}
 
           {isSidebarOpen && !isMobileView && (
-            <IconButton
-              aria-label="Toggle the sidebar navigation"
-              bgColor="transparent"
-              onClick={closeSidebar}
-            >
+            <IconButton aria-label="Toggle the sidebar navigation" bgColor="transparent" onClick={closeSidebar}>
               <CiMenuBurger />
             </IconButton>
           )}

@@ -71,6 +71,35 @@ export async function updateSuggestionStatus(id: number, status: Status): Promis
     .get(id) as Suggestion;
 }
 
+export async function updateSuggestionsStatus(ids: number[], status: Status): Promise<Suggestion[]> {
+  if (!ids.length) return [];
+
+  const query = `
+    UPDATE suggestions
+    SET status = ?
+    WHERE id IN (${ids.map(() => "?").join(",")})
+  `;
+
+  const result = db.prepare(query).run(status, ...ids);
+
+  if (result.changes === 0 || result.changes !== ids.length) {
+    throw new Error("Suggestions were not updated properly");
+  }
+
+  console.log(`✅ Successfully updated the status of ${result.changes} suggestions!`);
+
+  return db
+    .prepare(
+      `
+    SELECT s.*, e.name AS employee_name 
+    FROM suggestions s
+    JOIN employees e ON s.employee_id = e.id
+    WHERE s.id IN (${ids.map(() => "?").join(",")})
+    `
+    )
+    .all(...ids) as Suggestion[];
+}
+
 export async function saveSuggestion(
   suggestion: Omit<Suggestion, "id" | "created_at" | "updated_at" | "employee_name" | "completed_at">
 ) {

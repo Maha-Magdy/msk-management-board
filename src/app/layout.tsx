@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Header from "../components/layout/header";
-import { Box, Flex, VStack } from "@chakra-ui/react";
-import Sidebar from "../components/layout/sidebar";
 import Providers from "../providers";
 import { Toaster } from "@/components/ui/toaster";
+import Layout from "@/components/layout/layout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,16 +29,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Providers>
-          <Flex>
-            <Sidebar />
-
-            <VStack gap={0} minH="100vh" flexGrow={1}>
-              <Header />
-              <Box as="main" bgColor="bg.muted" w={{ base: "100vw", lg: "100%" }} p={4} flexGrow={1}>
-                {children}
-              </Box>
-            </VStack>
-          </Flex>
+          <Layout>{children}</Layout>
           <Toaster />
         </Providers>
       </body>

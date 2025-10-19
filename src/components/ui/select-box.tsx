@@ -11,7 +11,7 @@ interface SelectBoxProps {
   value?: string;
   onChange?: (value: string) => void;
   width?: string;
-  minWidth?: string;
+  minWidth?: string | Record<string, string>;
   maxWidth?: string | Record<string, string>;
   size?: "sm" | "md" | "lg";
   required?: boolean;
@@ -28,6 +28,7 @@ export function SelectBox({
   maxWidth = { base: "full", lg: "180px" },
   size = "sm",
   required,
+  ...props
 }: SelectBoxProps) {
   const collection = createListCollection({ items });
 
@@ -41,6 +42,7 @@ export function SelectBox({
       minWidth={minWidth}
       maxWidth={maxWidth}
       aria-labelledby={label}
+      {...props}
     >
       <Select.HiddenSelect />
       {label && (

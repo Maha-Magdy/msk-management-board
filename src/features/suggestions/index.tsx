@@ -1,22 +1,21 @@
-"use client"
+"use client";
 
-import { useAppStore } from "@/store/app";
-import { VStack, Grid, GridItem, Skeleton } from "@chakra-ui/react";
-import { useState } from "react";
+import { VStack, Grid, GridItem } from "@chakra-ui/react";
+import { useCallback, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 import useEmployees from "../employees/hooks/useEmployees";
 import AddSuggestionForm from "./components/add-suggestion-form";
 import SuggestionsFilters from "./components/filters/filters";
 import SuggestionDetails from "./components/suggestion-details";
 import SuggestionDrawer from "./components/suggestion-drawer";
-import SuggestionsTable from "./components/suggestions-table";
+import SuggestionsTable from "./components/table/suggestions-table";
 import { useSuggestions } from "./hooks/use-suggestions";
 import { Filters } from "./types/filters";
-import { Suggestion } from "./types/suggestion";
+import { Status, Suggestion } from "./types/suggestion";
+import BatchStatusDropdown from "./components/batch-status-dropdown";
+import { useSuggestionsStore } from "./store/suggestions";
 
 export default function Suggestions() {
-  const { isSidebarOpen } = useAppStore();
-  
   const [filters, setFilters] = useState<Filters>();
   const [isAddSuggestionDrawerOpen, setIsAddSuggestionDrawerOpen] = useState<boolean>(false);
   const [isOverviewSuggestionDrawerOpen, setIsOverviewSuggestionDrawerOpen] = useState<boolean>(false);
@@ -27,24 +26,42 @@ export default function Suggestions() {
   const { getEmployeesQuery } = useEmployees();
   const { data: employees = [] } = getEmployeesQuery;
 
+  const selectedSuggestions = useSuggestionsStore((state) => state.selectedSuggestions);
+
+
   function handleTableRowClick(suggestion: Suggestion) {
     setSelectedSuggestion(suggestion);
     setIsOverviewSuggestionDrawerOpen(true);
   }
 
+  const handleOnUpdateStatus = useCallback(
+    (id: number, status: Status) => suggestionStatusMutation.mutate({ id, status }),
+    [suggestionStatusMutation]
+  );
+
   return (
     <>
       <VStack
         width={{
-          lg: isSidebarOpen ? "calc(100vw - 20rem)" : "calc(100vw - 130px)",
+          lg: "full",
         }}
+        gap={4}
       >
         <Grid
-          templateColumns={{ base: "repeat(2, 1fr)", lg: "1fr auto auto" }}
+          templateColumns={{
+            base: selectedSuggestions.length > 0 ? "repeat(2, 1fr) auto" : "repeat(2, 1fr)",
+            lg: "1fr auto auto auto",
+          }}
           templateRows={{ base: "auto", lg: "repeat(2, auto)" }}
           gap="2"
           width="full"
           alignItems="end"
+          position="sticky"
+          top={0}
+          zIndex="docked"
+          bg="white"
+          boxShadow="sm"
+          p={3}
         >
           <SuggestionsFilters filters={filters} onChange={setFilters} />
           <GridItem gridArea={{ base: "2/ 2 /span 1/ span 1", lg: "auto" }}>
@@ -58,11 +75,16 @@ export default function Suggestions() {
               <AddSuggestionForm employees={employees ?? []} callback={() => setIsAddSuggestionDrawerOpen(false)} />
             </SuggestionDrawer>
           </GridItem>
+          {selectedSuggestions.length !== 0 && (
+            <GridItem gridArea={{ base: "2/ 3 /span 1/ span 1", lg: "auto" }}>
+              <BatchStatusDropdown />
+            </GridItem>
+          )}
         </Grid>
 
         <SuggestionsTable
           data={data as Suggestion[]}
-          onUpdateStatus={(id, status) => suggestionStatusMutation.mutate({ id, status })}
+          onUpdateStatus={handleOnUpdateStatus}
           callback={handleTableRowClick}
           isLoading={isLoading}
         />

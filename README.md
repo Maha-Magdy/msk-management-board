@@ -52,24 +52,24 @@
 
   - **Frontend & Backend: Next.js with React:**
 
-      *Why Next.js was chosen over plain React for several reasons:*
+    _Why Next.js was chosen over plain React for several reasons:_
 
-      **Built-in API Routes:** Allows mocking the backend directly within the app, making development faster and easier. When a real backend is ready, API logic can be updated without affecting the frontend.
+    **Full-Stack Capabilities:** Next.js was chosen because it enables building the application as a full-stack solution, not just a frontend interface. Unlike plain React, which focuses solely on the client side, Next.js provides built-in support for backend functionality through API routes and server actions. This allows the application to manage its own database, handle data fetching, and perform server-side operations seamlessly — without relying on an external backend or losing state when the page is refreshed.
 
-      **Future Complexity:** Next.js supports Server-Side Rendering (SSR) and Static Site Generation (SSG), allowing pages like the dashboard page to pre-rendered. This delivers faster perceived load times and better performance — essential for data-heavy dashboards, which is by time this board will be.
+    **Future Complexity:** Next.js supports Server-Side Rendering (SSR) and Static Site Generation (SSG), allowing pages like the dashboard page to pre-rendered. This delivers faster perceived load times and better performance — essential for data-heavy dashboards, which is by time this board will be.
 
-  - **Database: SQLite3:** a lightweight SQL database, simple to integrate with Next.js, and ideal for prototyping.
+    **Database - SQLite3:** SQLite3 was chosen as a lightweight relational database that integrates seamlessly with Next.js and is ideal for prototyping. A relational database was preferred over a non-relational option like MongoDB because the data model includes clear relationships — for example, each employee can have multiple suggestions and can also act as an admin or regular user. Handling such structured relations is more intuitive and efficient in SQL than in document-based databases, where joining or aggregating related data can be less straightforward.
+
+    **Styling & Design:** Chakra UI for a clean, accessible, and consistent UI.
 
 - **Architecture & Project Structure**
 
   - **Feature-Based Structure:** The project is organized using the src/features pattern, keeping related files together for better scalability and maintainability.
 
-  - **Global State:** A lightweight hook-based state manager, which is Zustand is used for truly global state (e.g., sidebar (open/close) state currently, and in the future to store logged-in admin).
+  - **Client State Management: Zustand:** Zustand, a lightweight and hook-based state management library, was chosen to handle client-side state that lives entirely within the application. It manages both global state — such as the sidebar’s open/close status and the logged-in admin’s information — and feature-specific state within individual modules. Zustand provides excellent performance and scalability, minimizing unnecessary re-renders while keeping the codebase modular, predictable, and easy to maintain.
 
-  - **State Management:** React Query is used for handling server state (fetching, caching, re-fetching, optimistic updates), freeing components from manual loading/error handling.
+  - **Server State Management: React Query:** React Query was selected to manage server-side state, handling data that comes from the database. It efficiently manages fetching, caching, background refetching, and optimistic updates (such as when a suggestion’s status changes), freeing components from manually handling loading and error states. This results in smoother data synchronization and a more responsive user experience.
 
-  - **Styling & Design:** Chakra UI for a clean, accessible, and consistent UI. 
-  
 - **Database Schema**
 
   The SQLite database is structured to support core features such as managing suggestions, employees, and querying analytics data.
@@ -80,7 +80,7 @@
 
 ## Getting Started
 
-_run it locally by following these steps:
+\_run it locally by following these steps:
 
 Clone the project
 Download the project files to your local machine:
@@ -129,14 +129,14 @@ This will open the application in your browser
 Open your browser and visit the Local URL provided (e.g., http://localhost:3000).
 
 <a name="demo"></a>
-  
+
 ## Demo
 
 Here are the links to the video demos of the MSK Management Board:
 
-🎥 [Video Demo Link _ Part 1](https://www.loom.com/share/75a64a5985524a97b071f20d0e8fbba9?sid=4ad3fb58-e915-44eb-877e-5ccb313a7d86)
+🎥 [Video Demo Link \_ Part 1](https://www.loom.com/share/75a64a5985524a97b071f20d0e8fbba9?sid=4ad3fb58-e915-44eb-877e-5ccb313a7d86)
 
-🎥 [Video Demo Link _ Part 2](https://www.loom.com/share/f4d0b6d1f131491abde4da86f4ab60b6?sid=a3bfc0e8-a5fa-4dca-bac8-699c85fe01e5)
+🎥 [Video Demo Link \_ Part 2](https://www.loom.com/share/f4d0b6d1f131491abde4da86f4ab60b6?sid=a3bfc0e8-a5fa-4dca-bac8-699c85fe01e5)
 
 <a name="contributing"></a>
 
