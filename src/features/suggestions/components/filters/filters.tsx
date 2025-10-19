@@ -3,13 +3,15 @@ import { Filters } from "../../types/filters";
 import { GridItem, useBreakpointValue } from "@chakra-ui/react";
 import EmployeeSearchBox from "./search-box";
 import DropdownFilters from "./dropdown-filters";
-import FiltersDrawer from "./filters-drawer";
 import { useSuggestionsStore } from "../../store/suggestions";
+import dynamic from "next/dynamic";
 
 interface SuggestionsFiltersProps {
   filters?: Filters;
   onChange: Dispatch<SetStateAction<Filters | undefined>>;
 }
+
+const FiltersDrawer = dynamic(() => import("./filters-drawer"));
 
 export default function SuggestionsFilters({ filters, onChange }: SuggestionsFiltersProps) {
   const [draftFilters, setDraftFilters] = useState<Filters | undefined>(filters);

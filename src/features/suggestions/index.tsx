@@ -3,17 +3,19 @@
 import { VStack, Grid, GridItem } from "@chakra-ui/react";
 import { useCallback, useState } from "react";
 import { IoMdAdd } from "react-icons/io";
+import dynamic from "next/dynamic";
 import useEmployees from "../employees/hooks/useEmployees";
 import AddSuggestionForm from "./components/add-suggestion-form";
 import SuggestionsFilters from "./components/filters/filters";
 import SuggestionDetails from "./components/suggestion-details";
-import SuggestionDrawer from "./components/suggestion-drawer";
 import SuggestionsTable from "./components/table/suggestions-table";
 import { useSuggestions } from "./hooks/use-suggestions";
 import { Filters } from "./types/filters";
 import { Status, Suggestion } from "./types/suggestion";
 import BatchStatusDropdown from "./components/batch-status-dropdown";
 import { useSuggestionsStore } from "./store/suggestions";
+
+const SuggestionDrawer = dynamic(() => import("./components/suggestion-drawer"));
 
 export default function Suggestions() {
   const [filters, setFilters] = useState<Filters>();
