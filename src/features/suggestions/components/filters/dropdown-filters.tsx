@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useCallback } from "react";
 import { Filters } from "../../types/filters";
 import { SelectBox } from "@/components/ui/select-box";
 import { Flex } from "@chakra-ui/react";
@@ -13,10 +13,10 @@ interface DropdownFiltersProps {
 export default function DropdownFilters({ filters, onChange }: DropdownFiltersProps) {
   const toggleClearSuggestions = useSuggestionsStore((state) => state.toggleClearSuggestions);
 
-  function handleOnChange(value: string, type: string) {
+  const handleOnChange = useCallback((value: string, type: string) => {
     onChange((f) => ({ ...f, [type]: value }));
     toggleClearSuggestions();
-  }
+  }, [onChange, toggleClearSuggestions]);
 
   return (
     <Flex gap={{ base: "4", lg: "2" }} direction={{ base: "column", lg: "row" }}>

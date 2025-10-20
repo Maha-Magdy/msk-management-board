@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from "react";
 import { Filters } from "../../types/filters";
 import { GridItem, useBreakpointValue } from "@chakra-ui/react";
 import EmployeeSearchBox from "./search-box";
@@ -18,21 +18,21 @@ export default function SuggestionsFilters({ filters, onChange }: SuggestionsFil
   const { toggleClearSuggestions, selectedSuggestions } = useSuggestionsStore();
   const isMobileView = useBreakpointValue({ base: true, xl: false });
 
-  function handleClearFilters() {
+  const handleClearFilters = useCallback(() => {
     setDraftFilters(undefined);
     onChange(undefined);
     toggleClearSuggestions();
-  }
+  }, [onChange, toggleClearSuggestions]);
 
-  function handleApplyFilters() {
+  const handleApplyFilters = useCallback(() => {
     onChange(draftFilters);
     toggleClearSuggestions();
-  }
+  }, [draftFilters, onChange, toggleClearSuggestions]);
 
-  function handleOnSearchValueChange(value: string) {
+  const handleOnSearchValueChange = useCallback((value: string) => {
     onChange((filters) => ({ ...filters, search: value }));
     toggleClearSuggestions();
-  }
+  }, [onChange, toggleClearSuggestions]);
 
   useEffect(() => setDraftFilters(filters), [filters]);
 

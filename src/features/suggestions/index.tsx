@@ -31,10 +31,10 @@ export default function Suggestions() {
   const selectedSuggestions = useSuggestionsStore((state) => state.selectedSuggestions);
 
 
-  function handleTableRowClick(suggestion: Suggestion) {
+  const handleTableRowClick = useCallback((suggestion: Suggestion) => {
     setSelectedSuggestion(suggestion);
     setIsOverviewSuggestionDrawerOpen(true);
-  }
+  }, []);
 
   const handleOnUpdateStatus = useCallback(
     (id: number, status: Status) => suggestionStatusMutation.mutate({ id, status }),
